@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Url = require('./models/urlModel');
 const app = express();
+const PORT=7000;
 const connectDB=async()=>{
     try{
         await mongoose.connect(process.env.MONGO_URI);
@@ -37,7 +38,7 @@ app.get('/',async(req,res)=>{
         res.status(500).send('Internal Server Error')
     }
 });
-app.get(':/shortUrl',async(req,res)=>{
+app.get('/:shortUrl',async(req,res)=>{
     try {
         const shortUrl=req.params.shortUrl;
         const url=await Url.findOne({shortUrl});
@@ -51,6 +52,6 @@ app.get(':/shortUrl',async(req,res)=>{
         res.status(500).send('Url not found')
     }
 })
-app.listen(process.env.PORT||7000,()=>{
+app.listen(process.env.PORT||PORT,()=>{
     console.log(`App is running `)
 })
