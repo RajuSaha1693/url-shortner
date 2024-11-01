@@ -51,6 +51,6 @@ app.get(':/shortUrl',async(req,res)=>{
         res.status(500).send('Url not found')
     }
 })
-app.listen(process.env.PORT,()=>{
-    console.log(`App is running on port http://localhost/${process.env.PORT}`)
+app.listen(process.env.PORT||7000,()=>{
+    console.log(`App is running `)
 })
